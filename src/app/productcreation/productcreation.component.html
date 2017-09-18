@@ -1,0 +1,31 @@
+<h1>Create a New Product</h1>
+<form #formData="ngForm" (submit)="addProduct()">
+  <p>
+    Title: 
+    <input
+      type="text"
+      name="title"
+      required 
+      minlength="2" 
+      maxlength="24"
+      [(ngModel)]="product.title"
+      #title="ngModel">
+      <span *ngIf="title.errors" style="color:red;">
+        Title must be between 2 and 24 characters long.
+      </span>
+  </p>
+  <p>
+    Price: 
+    <input
+      type="number"
+      name="price"
+      required
+      min="0"
+      [(ngModel)]="product.price"
+      #price="ngModel">
+      <span *ngIf="price.errors" style="color:red;">
+        Price must be 0 or greater.
+      </span>
+  </p>
+  <input type="submit" value="Create" [disabled]="!formData.valid">
+</form>

@@ -1,0 +1,32 @@
+<h1>Edit Product</h1>
+<form #formData="ngForm" (submit)="editProduct(product.id)">
+  <p>
+    Title: 
+    <input
+      type="text"
+      name="title"
+      required 
+      minlength="2" 
+      maxlength="24"
+      [(ngModel)]="product.title"
+      #title="ngModel">
+      <span *ngIf="title.errors" style="color:red;">
+        Title must be between 2 and 24 characters long.
+      </span>
+  </p>
+  <p>
+    Price: 
+    <input
+      type="number"
+      name="price"
+      required
+      min="0"
+      [(ngModel)]="product.price"
+      #price="ngModel">
+      <span *ngIf="price.errors" style="color:red;">
+        Price must be 0 or greater.
+      </span>
+  </p>
+  <button (click)="deleteProduct(product.id)">Delete</button>
+  <input type="submit" value="Update" [disabled]="!formData.valid">
+</form>
